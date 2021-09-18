@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 
 function App() {
+  const [notes, setNotes] = React.useState([]);
+  const [activeNote, setActiveNote] = React.useState();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div>
+      <header>
+        <h1>Note Taker</h1>
       </header>
+      <nav>
+        <button>New Note</button>
+        <button>Clear All Notes</button>
+        <button>Export</button>
+        <ul>
+          {
+            notes.map((note, index) => <li><button onClick={() => setActiveNote(index)}>{note.substring(0,10)}</button></li>)
+          }
+        </ul>
+      </nav>
+      <main>
+        <textarea onChange={(e) => {
+          const currentNotes = [...notes];
+          currentNotes.splice(activeNote, 1, e.target.value);
+          setNotes(currentNotes);
+        }}
+        value={notes[activeNote]}/>
+      </main>
     </div>
   );
 }
