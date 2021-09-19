@@ -1,16 +1,19 @@
 import React from 'react';
 import './App.css';
 
+const getNoteTitle = () => `${new Date().toLocaleTimeString()} ${new Date().toLocaleDateString()}\n---------------------------\n`;
+
 function App() {
-  const [notes, setNotes] = React.useState([]);
-  const [activeNote, setActiveNote] = React.useState();
+  const [notes, setNotes] = React.useState([getNoteTitle()]);
+  const [activeNote, setActiveNote] = React.useState(0);
   const hasNotes = notes.length > 0;
   const isEditing = activeNote !== undefined;
   const editorRef = React.useRef();
 
+
   const createNote = () => {    
     const noteId = notes.length;
-    setNotes((currentNotes) => [...currentNotes, `${new Date().toLocaleTimeString()} ${new Date().toLocaleDateString()}\n---------------------------\n`])
+    setNotes((currentNotes) => [...currentNotes, getNoteTitle()])
     setActiveNote(noteId);
   }
 
@@ -24,13 +27,6 @@ function App() {
     currentNotes.splice(activeNote, 1, e.target.value);
     setNotes(currentNotes);
   }
-
-  React.useEffect(() => {
-    if (!hasNotes) {
-      createNote();
-      if (editorRef.current) editorRef.current.focus();
-    }
-  }, []);
 
   return (
     <>
