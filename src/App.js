@@ -49,7 +49,7 @@ function App() {
         <nav>
           <ul>
             {
-              notes.map((note, index) => <li><button onClick={() => setActiveNote(index)}>{note.substring(0,25).replace(/\n/g, ' ')}</button></li>)
+              notes.map((note, index) => <li key={`${index}${note.substring(0,25).replace(/\n/g, ' ')}`}><button onClick={() => setActiveNote(index)}>{note.substring(0,25).replace(/\n/g, ' ')}</button></li>)
             }
           </ul>
         </nav>
