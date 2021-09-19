@@ -7,10 +7,8 @@
 ## Primary Functions
 
 - [X] Create New Note  
-- [X] Edit Existing Note  
-- [ ] Delete Existing Note   
-- [ ] Export Notes to Excel or similar
-- [ ] Persist data in local storage
+- [X] Edit Existing Note   
+- [X] Persist data in local storage
 
 ## Plan
 
