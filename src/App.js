@@ -1,11 +1,13 @@
 import React from 'react';
 import './App.css';
 
+const APP_KEY = 'NOTE_TAKER_2';
+
 const getNoteTitle = () => `${new Date().toLocaleTimeString()} ${new Date().toLocaleDateString()}\n---------------------------\n`;
 
 function App() {
   const [notes, setNotes] = React.useState(() =>  {
-    const stored = window.localStorage.getItem('NOTE_TAKER');
+    const stored = window.localStorage.getItem(APP_KEY);
     try {
       if (stored) return JSON.parse(stored);
     } catch (e) {}
@@ -22,20 +24,20 @@ function App() {
     const currentNotes = [...notes, getNoteTitle()];
     setNotes(currentNotes)
     setActiveNote(noteId);
-    window.localStorage.setItem('NOTE_TAKER', JSON.stringify(currentNotes));
+    window.localStorage.setItem(APP_KEY, JSON.stringify(currentNotes));
   }
 
   const clearNotes = () => {
     setNotes([]);
     setActiveNote(undefined);
-    window.localStorage.removeItem('NOTE_TAKER');
+    window.localStorage.removeItem(APP_KEY);
   }
 
   const updateNote = (e) => {
     const currentNotes = [...notes];
     currentNotes.splice(activeNote, 1, e.target.value);
     setNotes(currentNotes);
-    window.localStorage.setItem('NOTE_TAKER', JSON.stringify(currentNotes));
+    window.localStorage.setItem(APP_KEY, JSON.stringify(currentNotes));
   }
 
   return (
